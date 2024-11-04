@@ -13,7 +13,7 @@ const app = express()
 // const { generateAndSendReports } = require('./features/reportGenerator')
 const corsOptions = require('./config/corsOptions')
 
-const PORT = process.env.PORT
+const PORT = process.env.PORT || 8000
 const connectDB = require('./config/dbConn')
 
 connectDB(process.env.MONGODB_URI)
