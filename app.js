@@ -26,9 +26,11 @@ app.use(cookieParser())
 
 app.set('view engine', 'pug')
 
-app.use('/', express.static(path.join(__dirname, 'public')))
-app.use('/auth', require('./routes/authRoutes'))
-app.use('/inquiries', require('./routes/inquiryRoutes'))
+// app.use('/', express.static(path.join(__dirname, 'public')))
+// app.use('/auth', require('./routes/authRoutes'))
+// app.use('/inquiries', require('./routes/inquiryRoutes'))
+
+console.log('API RUNNING')
 
 mongoose.connection.once('open', () => {
     console.log('Connected to MongoDB');
