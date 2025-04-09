@@ -17,7 +17,7 @@ const sendEmail = async (adminEmail, transactionDetails) => {
     from: 'duquea95@gmail.com',
     to: adminEmail,
     subject: transactionDetails.subject,
-    text: transactionDetails.message,
+    text: transactionDetails.text,
     html: transactionDetails?.html
   };
 
@@ -30,6 +30,8 @@ const sendEmail = async (adminEmail, transactionDetails) => {
   });
 };
 
+
+
 module.exports={
-    sendTransactionEmail
+  sendEmail
 }

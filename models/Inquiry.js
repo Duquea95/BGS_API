@@ -6,10 +6,13 @@ const inquirySchema = new mongoose.Schema({
         ref: 'User', 
         required: true
     },
-    itemId: { 
-        type: mongoose.Schema.Types.ObjectId, 
-        ref: 'Item',
-        required: true 
+    description: {
+        type: String,
+        required: true,
+    },
+    insuranceValue: {
+        type: String,
+        required: true,
     },
     status: {
         type: String,
@@ -17,18 +20,21 @@ const inquirySchema = new mongoose.Schema({
         default: 'Pending' 
     },
     offerAmount: { // Offer made by your business
-        type: Number 
+        type: Number,
+        default: 0
     },
-    salePrice: { // Final agreed sale price
-        type: Number 
+    purchasedPrice: { // Final agreed sale price
+        type: Number,
+        default: 0,
     }, 
     labelType: { // Shipping label
         type: String,
         enum: ['FedEx', 'USPS'], 
-        required: true 
+        default: 'FedEx'
     }, 
     shipmentTrackingNumber: {
-        type: String 
+        type: String,
+        default: ''
     },
 }, {timestamps: true})
   

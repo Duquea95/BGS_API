@@ -1,4 +1,4 @@
-const { sendTransactionEmail } = require("../features/mailer")
+const { sendEmail } = require("../features/mailer")
 const Product = require("../models/Product")
 const Report = require("../models/Report")
 const TransactionSchema = require("../models/TransactionSchema")
@@ -115,7 +115,7 @@ const csvUpdate = async(req, res) => {
                 mail.subject = 'Investor Watch - Account Activated!'
                 mail.message = `Thank you for joining Investor Watch! Please use the link below to change your password and login to your account! http://localhost:3000/account/reset/${createdUser._id}`
                 mail.html = `<p>Thank you for joining Investor Watch! Please use the link below to change your password and login to your account! <br/> <a href="http://localhost:3000/account/reset/${createdUser._id}">Reset Password</a></p>`
-                await sendTransactionEmail( createdUser.email ,mail)
+                await sendEmail( createdUser.email ,mail)
 
             }
             
@@ -180,7 +180,7 @@ const createUser = async(req, res) => {
         mail.subject = 'Investor Watch - Account Activated!'
         mail.message = `Thank you for joining Investor Watch! Your account has been activated.!`
         
-        await sendTransactionEmail( user.email, mail )
+        await sendEmail( user.email, mail )
 
         return res.status(201).json({message: `New user: ${email} created`})
     }else{
@@ -217,7 +217,7 @@ const updateActiveState = async(req, res) => {
     mail.subject = 'Account Status Update'
     if(user.active != true) mail.message = 'Your account is no longer active!'
     mail.message = `Your account has been activated!`
-    await sendTransactionEmail(user.email, mail)
+    await sendEmail(user.email, mail)
 
     const filter = { active: true, role: 25}
 
@@ -254,7 +254,7 @@ const updateInvestment = async(req,res) => {
         message: `Congratulations, your account has been updated by ${req.body.updateValueBy}.\n Your portfolio value is now ${updatedUser.portfolioValue}`
     }
     
-    let emailResult = await sendTransactionEmail( updatedUser.email, mail )
+    let emailResult = await sendEmail( updatedUser.email, mail )
 
     res.status(200).json(updatedUser)
 }
@@ -285,7 +285,7 @@ const updateUserInfo = async(req,res) => {
                 text: `Hi ${updatedUser.email}, please use the following link to finish activating your Investor Watch Account: localhost:3000/account/activation/${updatedUser._id}`,
                 html: `<div><p>Hi ${updatedUser.email}, please use the following link to finish activating your Investor Watch Account:</p><a href="http://localhost:3000/account/activation/${updatedUser._id}">Click To Register</a></div>`,
             }
-            sendTransactionEmail(updatedUser.email, emailDetails)
+            sendEmail(updatedUser.email, emailDetails)
         }
 
 
@@ -309,7 +309,7 @@ const resetPassword = async(req,res) => {
         message: `Congratulations, you have successfully reset your password! Please contact the admin if you have any questions.`
     }
     
-    let emailResult = await sendTransactionEmail( foundUser.email, mail )
+    let emailResult = await sendEmail( foundUser.email, mail )
     console.log('password changed')
     res.status(200).json(foundUser)
 }

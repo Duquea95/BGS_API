@@ -9,6 +9,12 @@ const multer = require('multer');
 const upload = multer({ dest: "uploads/" });
 var nodeCron = require('node-cron')
 const app = express()
+const rateLimit = require('express-rate-limit');
+
+const limiter = rateLimit({
+  windowMs: 1 * 60 * 1000, // 1 minute
+  max: 5, // limit each IP to 5 requests per minute
+});
 
 // const { generateAndSendReports } = require('./features/reportGenerator')
 const corsOptions = require('./config/corsOptions')
@@ -28,7 +34,7 @@ app.set('view engine', 'pug')
 
 app.use('/', express.static(path.join(__dirname, 'public')))
 // app.use('/auth', require('./routes/authRoutes'))
-app.use('/inquiries', require('./routes/inquiryRoutes'))
+app.use('/inquiries', require('./routes/inquiryRoutes'), limiter)
 
 console.log('API RUNNING')
 
