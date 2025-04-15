@@ -10,7 +10,7 @@ const { sendEmail } = require('../features/mailer');
 // const projectId = process.env.PROJECT_ID
 // const keyFilename = process.env.KEYFILENAME
 // const storage = new Storage({
-//     keyFilename: '../jdwatches-inventory-6fbc97798de5.json'
+//     keyFilename: process.env.KEYFILENAME
 // })
 
 // const upload = multer({
